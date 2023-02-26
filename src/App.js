@@ -4,9 +4,14 @@ import bg from './img/bg.png';
 import i1 from './img/shopping1.png';
 import i2 from './img/shopping2.png';
 import i3 from './img/shopping3.png';
+import i4 from './img/shopping4.png';
+import i5 from './img/shopping5.png';
+import i6 from './img/shopping6.png';
+
 import data from './data';
 import { useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 import Shoes from './component/ShoesData';
 import DetailPage from './routes/Detail';
@@ -14,7 +19,7 @@ import DetailPage from './routes/Detail';
 function App() {
   
   let [shoes, setShoes] = useState(data)
-  let [image, setImage] = useState([i1, i2, i3])
+  let [image, setImage] = useState([i1, i2, i3, i4, i5, i6])
   let navigate = useNavigate();       // 페이지 이동 도와주는 함수
 
   return (
@@ -38,10 +43,24 @@ function App() {
           <>
             <div className='main-bg' style={{ backgroundImage: 'url(' + bg + ')' }}></div>
             <Container>
-              <Row>{DataFunc({shoes, image})}</Row>
+              <Row>
+                {DataFunc({shoes, image})}
+              </Row>
+              
             </Container>
+            <button onClick={()=> {
+              axios.get("https://codingapple1.github.io/shop/data2.json")
+                .then((res) => {
+                  let copy = [...shoes, ...res.data];
+                  setShoes(copy);
+                })
+                .catch((err)=> console.log(err))
+
+
+            }}>더보기</button>
           </>
         } />
+
         <Route path="/detail/:id" element={<DetailPage shoes={shoes} image={image} />}/>
 
         <Route path="*" element={<div>없는 페이지롱</div>} />
@@ -67,7 +86,7 @@ function App() {
 function DataFunc (props) {
   let array = []
   for ( let i = 0; i < props.shoes.length ; i++) {
-    array.push(<Shoes imgurl={props.image[i]} title={props.shoes[i].title} price={props.shoes[i].price}></Shoes>)
+    array.push(<Shoes id={i} imgurl={props.image[i]} title={props.shoes[i].title} price={props.shoes[i].price}></Shoes>)
   }
   return array
 }
