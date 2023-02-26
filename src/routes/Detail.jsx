@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 // import styled from 'styled-components';
 
+import { Context1 } from './../App.js'
 
 // const YellowBtn = styled.button`
 //   background: ${ props => props.bg };
@@ -11,11 +12,17 @@ import { useParams } from 'react-router-dom';
 // `
 
 
+
 export default function DetailPage(props) {
+
+
 
   // let [ alert, alertSet] = useState(true);
   let [ count, setCount] = useState(0);
   let [ value, setValue] = useState('');
+  let [ tab, setTab] = useState(0);
+  
+  // Context API 연습
   
   
   let {id} = useParams();
@@ -67,18 +74,38 @@ export default function DetailPage(props) {
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="/home">
-      <Nav.Item>
-        <Nav.Link href="/home">Active</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link-1">Option 2</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
-      </Nav.Item>
-    </Nav>
+        <Nav.Item >
+          <Nav.Link eventKey="link-00" onClick={() => setTab(0)}>버튼0</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-01" onClick={() => setTab(1)}>버튼1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-02" onClick={() => setTab(2)}>버튼2</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <Tab tab={tab}/>
     </div> 
   )
+
+}
+
+function Tab({tab}) {
+  // context(보관함)을 해체해줌
+  let {store} = useContext(Context1)
+  
+  // // 방법1. array 사용 (깔꼼)
+  // return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]
+
+  // 방법1-1 Context를 통해 데이터 상속
+  return <div>{store[tab]}</div>
+
+  // 방법2. 조건문 사용
+  // if (tab === 0){
+  //   return <div>내용0</div>
+  // } else if (tab === 1){
+  //   return <div>내용1</div>
+  // } else {
+  //   return <div>내용2</div>
+  // }
 }
