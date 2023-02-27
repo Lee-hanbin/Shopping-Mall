@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { addCart } from '../store/userSlice.js';
 // import styled from 'styled-components';
 
 import { Context1 } from './../App.js'
@@ -16,7 +18,6 @@ import { Context1 } from './../App.js'
 export default function DetailPage(props) {
 
 
-
   // let [ alert, alertSet] = useState(true);
   let [ count, setCount] = useState(0);
   let [ value, setValue] = useState('');
@@ -24,6 +25,7 @@ export default function DetailPage(props) {
   
   // Context API 연습
   
+  let dispatch = useDispatch();
   
   let {id} = useParams();
   for ( let i = 0; i < props.shoes.length ; i++) {
@@ -70,7 +72,11 @@ export default function DetailPage(props) {
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button 
+            className="btn btn-danger" 
+            onClick={() => {
+              dispatch(addCart({id: id, name: props.shoes[id].title, count: 1 }))
+            }}>주문하기</button> 
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="/home">
