@@ -30,7 +30,7 @@ export default function Cart() {
             cart.map((a, i) => {
               return (
                 <tr key={i}>
-                  <td>1</td>
+                  <td>{i+1}</td>
                   <td>{cart[i].name}</td>
                   <td>{cart[i].count}</td>
                   <td>

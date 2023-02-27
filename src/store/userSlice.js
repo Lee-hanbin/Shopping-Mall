@@ -8,11 +8,17 @@ export let cart = createSlice({
   ],
   reducers: {
     changeCount(state, action){
-      state.map((a, i) => {
-        if (state[i].id === action.payload){
-          state[i].count += 1
-        }
-      })
+
+      // 강사님 방법 (findIndex 사용)
+      let idx = state.findIndex((a) => a.id === action.payload)
+      state[idx].count += 1
+
+      // // 내 방법 (반복문)
+      // state.map((a, i) => {
+      //   if (state[i].id === action.payload){
+      //     state[i].count += 1
+      //   }
+      // })
     },
     addCart(state, action){
       state.push(action.payload)
