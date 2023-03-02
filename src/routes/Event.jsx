@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-export default function About() {
+function Event () {
   return (
     <div>
-      <h4>회사정보</h4>
+      <h4>오늘의 이벤트</h4>
       <Outlet></Outlet>
-    </div>
+    </div>  
   )
 }
+
+export default Event;

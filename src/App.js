@@ -12,6 +12,8 @@ import i3 from './img/shopping3.png';
 import i4 from './img/shopping4.png';
 import i5 from './img/shopping5.png';
 import i6 from './img/shopping6.png';
+import About from './routes/About';
+import Event from './routes/Event';
 
 // context (보관함) 를 만들어 줌
 export let Context1 = createContext()
@@ -26,6 +28,7 @@ function App() {
 
   return (      
       <Routes>
+
         <Route path="/" element={<Home />} />
 
         <Route 
@@ -56,24 +59,5 @@ function App() {
   );
 }
 
-
-
-function About () {
-  return (
-    <div>
-      <h4>회사정보</h4>
-      <Outlet></Outlet>
-    </div>
-  )
-}
-
-function Event () {
-  return (
-    <div>
-      <h4>오늘의 이벤트</h4>
-      <Outlet></Outlet>
-    </div>  
-  )
-}
 
 export default App;

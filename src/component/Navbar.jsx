@@ -7,7 +7,7 @@ function NavbarUi() {
   return (
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Shop</Navbar.Brand>
+          <Navbar.Brand href="/">Shop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}} >Cart</Nav.Link>

@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Background from '../component/Background.jsx';
 import { addCart } from '../store/userSlice.js';
 // import styled from 'styled-components';
 
 import { Context1 } from './../App.js'
+import '../App.css';
 
 // const YellowBtn = styled.button`
 //   background: ${ props => props.bg };
@@ -53,45 +55,51 @@ export default function DetailPage(props) {
   },[value])
 
   return (
-    <div className="container">
-      <input onChange={(e)=>{ setValue(e.target.value) }} />
-      {/* {
-        alert === true
-        ? (<div className="alert alert-warning">
-            2초 이내 구매시 할인
-          </div>)
-        : null
-      } */}
-      {count}
-      <button onClick={()=>{ setCount(count+1)}}></button>
-      <div className="row">
-        <div className="col-md-6">
-          <img src={props.image[id]} width="100%" alt='1'/>
+    <Background
+      back = {
+
+      <div className="container">
+        <input onChange={(e)=>{ setValue(e.target.value) }} />
+        {/* {
+          alert === true
+          ? (<div className="alert alert-warning">
+              2초 이내 구매시 할인
+            </div>)
+          : null
+        } */}
+        {count}
+        <button onClick={()=>{ setCount(count+1)}}></button>
+        <div className="row">
+          <div className="col-md-6">
+            <img src={props.image[id]} width="100%" alt='1'/>
+          </div>
+          <div className="col-md-6">
+            <h4 className="pt-5">{props.shoes[id].title}</h4>
+            <p>{props.shoes[id].content}</p>
+            <p>{props.shoes[id].price}</p>
+            <button 
+              className="btn btn-danger" 
+              onClick={() => {
+                dispatch(addCart({id: id, name: props.shoes[id].title, count: 1 }))
+              }}>주문하기</button> 
+          </div>
         </div>
-        <div className="col-md-6">
-          <h4 className="pt-5">{props.shoes[id].title}</h4>
-          <p>{props.shoes[id].content}</p>
-          <p>{props.shoes[id].price}</p>
-          <button 
-            className="btn btn-danger" 
-            onClick={() => {
-              dispatch(addCart({id: id, name: props.shoes[id].title, count: 1 }))
-            }}>주문하기</button> 
-        </div>
-      </div>
-      <Nav variant="tabs" defaultActiveKey="/home">
-        <Nav.Item >
-          <Nav.Link eventKey="link-00" onClick={() => setTab(0)}>버튼0</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-01" onClick={() => setTab(1)}>버튼1</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-02" onClick={() => setTab(2)}>버튼2</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Tab tab={tab}/>
-    </div> 
+        <Nav variant="tabs" defaultActiveKey="/home">
+          <Nav.Item >
+            <Nav.Link eventKey="link-00" onClick={() => setTab(0)}>버튼0</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link-01" onClick={() => setTab(1)}>버튼1</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link-02" onClick={() => setTab(2)}>버튼2</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Tab tab={tab}/>
+      </div> 
+      }
+    >
+    </Background>
   )
 
 }
