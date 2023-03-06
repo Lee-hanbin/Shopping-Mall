@@ -31,9 +31,10 @@ function Home (){
   return (
     <Background
       back = {
-        <Bg>
+        <>
+          <Bg />
           <Container>
-            <Row>
+            <Row md="3">
               {DataFunc({shoes, image})}
             </Row>
           </Container>
@@ -45,7 +46,7 @@ function Home (){
               })
               .catch((err)=> console.log(err))
           }}>더보기</button>
-        </Bg>
+        </>
       }
     >
 
