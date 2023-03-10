@@ -37,6 +37,14 @@ export default function DetailPage(props) {
     } 
   }
   
+  let watch = JSON.parse(localStorage.getItem('watched'))
+  watch = [...watch, id]
+  watch = new Set(watch)
+  watch = Array.from(watch)
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify(watch))
+  }, [])
+  
   // useEffect(() => {
   //   // 타이머
   //   let timer = setTimeout(() =>{ alertSet(false)}, 2000)

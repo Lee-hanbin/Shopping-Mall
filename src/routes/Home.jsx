@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Container, Row } from 'react-bootstrap';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 import Shoes from "../component/ShoesData";
@@ -28,6 +28,13 @@ function Home (){
   let [shoes, setShoes] = useState(data)
   let [image, setImage] = useState([i1, i2, i3, i4, i5, i6])
 
+  useEffect(() => {
+    const chk = localStorage.getItem('watched')
+    console.log(chk)
+    if (!chk) {
+      localStorage.setItem('watched', JSON.stringify([]))
+    }
+  }, [])
   return (
     <Background
       back = {
@@ -60,7 +67,7 @@ export default Home;
 function DataFunc (props) {
   let array = []
   for ( let i = 0; i < props.shoes.length ; i++) {
-    array.push(<Shoes id={i} imgurl={props.image[i]} title={props.shoes[i].title} price={props.shoes[i].price}></Shoes>)
+    array.push(<Shoes key={i} id={i} imgurl={props.image[i]} title={props.shoes[i].title} price={props.shoes[i].price}></Shoes>)
   }
   return array
 }

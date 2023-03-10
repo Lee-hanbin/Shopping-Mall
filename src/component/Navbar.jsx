@@ -12,6 +12,9 @@ function NavbarUi() {
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}} >Cart</Nav.Link>
           </Nav>
+          <Nav>
+            <Nav.Link style={{ textAlign: "right" }} onClick={() => {navigate('/watched')}}>최근 본 상품</Nav.Link>
+          </Nav>
         </Container>
       </Navbar>
   )

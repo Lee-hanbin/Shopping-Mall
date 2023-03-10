@@ -14,6 +14,7 @@ import i5 from './img/shopping5.png';
 import i6 from './img/shopping6.png';
 import About from './routes/About';
 import Event from './routes/Event';
+import Watch from './routes/Watch';
 
 // context (보관함) 를 만들어 줌
 export let Context1 = createContext()
@@ -28,11 +29,10 @@ function App() {
 
   return (      
       <Routes>
-
         <Route path="/" element={<Home />} />
-
+        <Route path="/watched" element={<Watch />}></Route>
         <Route 
-          path="/detail/:id" 
+          path={'/detail/:id'}
           element={
             // Context1로 감싸서 Props -> props -> .. 대신 한번에 사용가능
             <Context1.Provider value={{store}}>
@@ -40,20 +40,16 @@ function App() {
             </Context1.Provider>
           }
         />
-
-        <Route path="/cart" element={<Cart></Cart>}></Route>
-
-        <Route path="*" element={<div>없는 페이지롱</div>} />
-
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>요 멤버쓰</div>} />
           <Route path="location" element={<div>요 위치쓰</div>} />
         </Route>
-
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />
           <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
         </Route>
+        <Route path="*" element={<div>없는 페이지롱</div>} />
 
       </Routes>
   );
