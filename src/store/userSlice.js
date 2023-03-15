@@ -21,7 +21,16 @@ export let cart = createSlice({
       // })
     },
     addCart(state, action){
-      state.push(action.payload)
+      let flag = 0;
+      for (var i= 0; i < state.length; i++){
+        if (state[i].id === action.payload.id){
+          flag = 1
+          state[i].count += 1
+        }
+      }
+      if (flag == 0){
+        state.push(action.payload)
+      }
     }
   }
 })
