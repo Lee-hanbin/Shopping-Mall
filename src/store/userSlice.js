@@ -28,7 +28,7 @@ export let cart = createSlice({
           state[i].count += 1
         }
       }
-      if (flag == 0){
+      if (flag === 0){
         state.push(action.payload)
       }
     }

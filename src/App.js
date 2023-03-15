@@ -1,10 +1,13 @@
 import data from './data';
-import { createContext, useState } from 'react';
+import { createContext, lazy, Suspense, useState } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 
-import DetailPage from './routes/Detail';
-import Cart from './routes/Cart';
-import Home from './routes/Home';
+// import DetailPage from './routes/Detail';
+// import Cart from './routes/Cart';
+// import Home from './routes/Home';
+// import About from './routes/About';
+// import Event from './routes/Event';
+// import Watch from './routes/Watch';
 
 import i1 from './img/shopping1.png';
 import i2 from './img/shopping2.png';
@@ -12,9 +15,14 @@ import i3 from './img/shopping3.png';
 import i4 from './img/shopping4.png';
 import i5 from './img/shopping5.png';
 import i6 from './img/shopping6.png';
-import About from './routes/About';
-import Event from './routes/Event';
-import Watch from './routes/Watch';
+
+const Cart = lazy(() => import('./routes/Cart'));
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+const Event = lazy(() => import('./routes/Event'));
+const Watch = lazy(() => import('./routes/Watch'));
+const DetailPage = lazy(() => import('./routes/Detail'));
+
 
 // context (보관함) 를 만들어 줌
 export let Context1 = createContext()
@@ -27,7 +35,8 @@ function App() {
   let [shoes, setShoes] = useState(data)
   let [image, setImage] = useState([i1, i2, i3, i4, i5, i6])
 
-  return (      
+  return (  
+    <Suspense fallback={<div>로딩중</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/watched" element={<Watch />}></Route>
@@ -52,6 +61,7 @@ function App() {
         <Route path="*" element={<div>없는 페이지롱</div>} />
 
       </Routes>
+    </Suspense>
   );
 }
 
